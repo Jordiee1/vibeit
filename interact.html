@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vibe Check – VIBIT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <div class="nav-blob" style="animation:blobMorph 4s ease-in-out infinite;"></div>
+      <span>VIBIT</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="interact.html" class="active">Try it</a></li>
+      <li><a href="result.html">Vibes</a></li>
+    </ul>
+    <a href="interact.html" class="btn-nav">Start Vibe ✨</a>
+    <button class="hamburger" id="hamburger">☰</button>
+  </nav>
+
+  <!-- Analyzing overlay -->
+  <div class="analyzing-overlay" id="analyzingOverlay">
+    <div class="analyzing-blobs">
+      <div class="a-blob"></div>
+      <div class="a-blob"></div>
+      <div class="a-blob"></div>
+    </div>
+    <p class="analyzing-text">กำลังวิเคราะห์ไวบ์<span class="analyzing-dots"></span></p>
+  </div>
+
+  <div class="page-wrap">
+    <section class="interact-page">
+      <div class="blob blob-i1"></div>
+      <div class="blob blob-i2"></div>
+
+      <!-- small mascot -->
+      <div class="mascot float-1" style="width:100px;height:100px;top:80px;right:4%;position:absolute;z-index:3;">
+        <img src="assets/mascot/blob_pink.png" alt=""
+             onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','pink')"/>
+      </div>
+
+      <div class="quiz-wrapper">
+
+        <!-- ===== SCREEN 0: INTRO ===== -->
+        <div class="quiz-screen active" id="screen-intro">
+          <div style="text-align:center;padding:40px 0;">
+            <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:28px;">
+              <div class="mascot float-2" style="width:130px;height:130px;position:relative;margin-bottom:-16px;">
+                <img src="assets/mascot/blob_blue.png" alt=""
+                     onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','blue')"/>
+              </div>
+              <div class="quiz-bubble">
+                มาเช็กสไตล์ที่ใช่<br/>ให้เราได้แมตช์สิ่งที่เหมาะกับคุณ ✨
+              </div>
+            </div>
+            <h2 style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;margin-bottom:12px;line-height:1.3;">
+              ตอบคำถาม 3 ข้อ<br/>เพื่อเช็กสไตล์ที่ใช่สำหรับคุณ!
+            </h2>
+            <p style="color:var(--text-light);margin-bottom:28px;">ใช้เวลาไม่ถึง 1 นาที 🕐</p>
+            <button class="btn-primary" onclick="VibitQuiz.start()">เริ่มเลย! 🚀</button>
+          </div>
+        </div>
+
+        <!-- ===== SCREEN Q1 ===== -->
+        <div class="quiz-screen" id="screen-q1">
+          <div class="quiz-progress">
+            <div class="progress-bar"><div class="progress-fill" id="prog1" style="width:33%"></div></div>
+            <span class="progress-label">1/3</span>
+          </div>
+          <h3 class="quiz-question">
+            ถ้าจะหาชุดเวลาไปเที่ยว<br/>OOTD ของคุณจะเป็นแบบไหนน้า?
+          </h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="VibitQuiz.answer(1,'Y2K')">🌟 Y2K / ตัวมารดาสลับๆ</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(1,'Minimal')">🤍 มินิมอล / เอิร์ธโทนเทสดี</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(1,'Street')">🔥 สตรีท / ตัวตึงเท่ๆ</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(1,'Classic')">👒 ลูกคุณ / แกล้งๆ ดูแกลม</button>
+          </div>
+        </div>
+
+        <!-- ===== SCREEN Q2 ===== -->
+        <div class="quiz-screen" id="screen-q2">
+          <div class="quiz-progress">
+            <div class="progress-bar"><div class="progress-fill" id="prog2" style="width:66%"></div></div>
+            <span class="progress-label">2/3</span>
+          </div>
+          <h3 class="quiz-question">
+            เรฟถ่ายรูปลงโซเชียล<br/>มู้ดแบบไหนที่เรียกว่าจิ้ง?
+          </h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="VibitQuiz.answer(2,'Digital')">📱 ดิจิตอล / เปิดแฟลชฟีลเผลอ</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(2,'Dramatic')">🎭 จัดเต็ม / แสงเป๊ะ หน้าเป๊ะ</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(2,'Film')">🎞️ โทนฟิล์ม / มู้ดหนัง ซีนอารมณ์</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(2,'Lifestyle')">🌸 ไลฟ์สไตล์ / แกล้งเผลอ ปล่อยจอย</button>
+          </div>
+        </div>
+
+        <!-- ===== SCREEN Q3 ===== -->
+        <div class="quiz-screen" id="screen-q3">
+          <div class="quiz-progress">
+            <div class="progress-bar"><div class="progress-fill" id="prog3" style="width:100%"></div></div>
+            <span class="progress-label">3/3</span>
+          </div>
+          <h3 class="quiz-question">
+            ไปเที่ยวทั้งที<br/>กิจกรรมไหนที่ต้องหาทำ?
+          </h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="VibitQuiz.answer(3,'Cafe')">☕ คาเฟ่ฮอปปิง / เก็บสปอตฮิต</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(3,'Hidden')">🗺️ มุมลับ / ที่ที่คนยังไม่ค่อยไป</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(3,'Concert')">🎵 ตามรอยเมน / สายคอนเสิร์ต</button>
+            <button class="quiz-opt" onclick="VibitQuiz.answer(3,'Chill')">🌅 หนีความวุ่นวาย / ไปฮีลใจ</button>
+          </div>
+        </div>
+
+        <!-- ===== SCREEN CAMERA ===== -->
+        <div class="quiz-screen" id="screen-camera">
+          <div class="camera-screen">
+            <h3>📸 ถ่ายรูป OOTD ของคุณ</h3>
+            <p>ให้ AI วิเคราะห์ไวบ์จากชุดที่ใส่วันนี้</p>
+
+            <div class="camera-viewfinder" id="cameraView" onclick="VibitQuiz.fakeCapture()">
+              <div class="capture-flash" id="captureFlash"></div>
+              <div class="cam-icon">📷</div>
+              <p>แตะเพื่อถ่ายรูป</p>
+              <p style="font-size:.78rem;color:#9CA3AF;">(Simulated capture)</p>
+            </div>
+
+            <div class="camera-btns">
+              <button class="btn-primary" onclick="VibitQuiz.fakeCapture()">📸 Capture!</button>
+              <button class="btn-ghost" onclick="VibitQuiz.skipCamera()">ข้ามขั้นตอนนี้ →</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /quiz-wrapper -->
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><div class="nav-blob"></div>VIBIT</div>
+    <p class="footer-tagline">Find your Vibe. Book your Local.</p>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="interact.html">Try Vibe Check</a></li>
+      <li><a href="result.html">Results</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a href="#" class="social-btn">📸</a>
+      <a href="#" class="social-btn">🎵</a>
+      <a href="#" class="social-btn">💙</a>
+      <a href="#" class="social-btn">💬</a>
+    </div>
+    <p class="footer-copy">© 2025 VIBIT – Student Project.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

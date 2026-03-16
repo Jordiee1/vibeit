@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vibe Result – VIBIT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <div class="nav-blob" style="animation:blobMorph 4s ease-in-out infinite;"></div>
+      <span>VIBIT</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="interact.html">Try it</a></li>
+      <li><a href="result.html" class="active">Vibes</a></li>
+    </ul>
+    <a href="interact.html" class="btn-nav">Start Vibe ✨</a>
+    <button class="hamburger" id="hamburger">☰</button>
+  </nav>
+
+  <div class="page-wrap">
+    <section class="result-page">
+      <div class="blob blob-r1"></div>
+      <div class="blob blob-r2"></div>
+      <div class="blob blob-r3"></div>
+
+      <!-- Floating mascots -->
+      <div class="mascot float-1" style="width:130px;height:130px;top:80px;right:5%;position:absolute;z-index:3;">
+        <img src="assets/mascot/blob_pink.png" alt=""
+             onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','pink')"/>
+      </div>
+      <div class="mascot float-3" style="width:100px;height:100px;bottom:300px;left:3%;position:absolute;z-index:3;">
+        <img src="assets/mascot/blob_green.png" alt=""
+             onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','green')"/>
+      </div>
+
+      <!-- ===== VIBE RESULT HERO ===== -->
+      <div class="vibe-result-hero">
+        <div class="section-label">VIBE RESULT ✨</div>
+        <br/>
+        <div class="vibe-score-ring" id="vibeScoreRing">
+          <span class="vibe-emoji" id="vibeEmoji">✨</span>
+          <span class="vibe-score" id="vibeScoreText">98%</span>
+        </div>
+        <h2 class="vibe-name" id="vibeName">Loading...</h2>
+        <p class="vibe-desc" id="vibeDesc">กำลังโหลดผลไวบ์ของคุณ...</p>
+        <div class="vibe-tags" id="vibeTags"></div>
+        <div class="result-actions">
+          <button class="btn-primary" onclick="VibitResult.share()">📤 แชร์ไวบ์ของฉัน</button>
+          <a href="interact.html" class="btn-ghost">🔄 เช็กใหม่อีกครั้ง</a>
+        </div>
+      </div>
+
+      <!-- ===== RECOMMENDED CARDS ===== -->
+      <h3 class="result-section-title">🎯 แนะนำสำหรับ Vibe ของคุณ</h3>
+      <div class="result-cards" id="resultCards">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- ===== BUDDY MATCHING ===== -->
+      <h3 class="result-section-title">🤝 บัดดี้ที่ไวบ์ตรงกัน</h3>
+      <div class="buddy-grid" id="buddyGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <a href="interact.html" class="btn-primary">🔄 ลองเช็กไวบ์ใหม่</a>
+      <br/><br/>
+
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><div class="nav-blob"></div>VIBIT</div>
+    <p class="footer-tagline">Find your Vibe. Book your Local.</p>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="interact.html">Try Vibe Check</a></li>
+      <li><a href="result.html">Results</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a href="#" class="social-btn">📸</a>
+      <a href="#" class="social-btn">🎵</a>
+      <a href="#" class="social-btn">💙</a>
+      <a href="#" class="social-btn">💬</a>
+    </div>
+    <p class="footer-copy">© 2025 VIBIT – Student Project.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Load result on page ready
+    document.addEventListener('DOMContentLoaded', function() {
+      VibitResult.load();
+    });
+  </script>
+</body>
+</html>

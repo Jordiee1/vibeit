@@ -1,1298 +1,145 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>VIBIT</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --pink: #FF3EA5;
-    --pink-light: #FF7CC3;
-    --green: #3DFFA0;
-    --green-blob: #4ADE80;
-    --blue: #60CFFF;
-    --blue-blob: #38BDF8;
-    --purple: #C084FC;
-    --bg: #FFFFFF;
-    --text: #111111;
-    --text-secondary: #666666;
-    --surface: #F4F4F6;
-    --border: #E8E8EC;
-    --font-th: 'Noto Sans Thai', sans-serif;
-    --font-en: 'Figtree', sans-serif;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-  body {
-    font-family: var(--font-th);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ===== SCREEN SYSTEM ===== */
-  .screen {
-    display: none;
-    flex-direction: column;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-    animation: fadeIn 0.35s ease;
-  }
-  .screen.active { display: flex; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    33% { transform: translateY(-12px) rotate(2deg); }
-    66% { transform: translateY(-6px) rotate(-1deg); }
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
-  }
-
-  /* ===== LOGO ===== */
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-en);
-    font-weight: 800;
-    font-size: 22px;
-    letter-spacing: -0.5px;
-    color: var(--text);
-  }
-  .logo-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  /* ===== BLOB BACKGROUNDS ===== */
-  .blob-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(1px);
-  }
-
-  /* ===== BUTTONS ===== */
-  .btn-primary {
-    width: 100%;
-    padding: 17px 24px;
-    background: var(--text);
-    color: white;
-    border: none;
-    border-radius: 100px;
-    font-family: var(--font-th);
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-primary:active { transform: scale(0.97); }
-  .btn-primary.pink {
-    background: linear-gradient(135deg, var(--pink), #FF6BC0);
-    color: white;
-    box-shadow: 0 8px 24px rgba(255, 62, 165, 0.35);
-  }
-
-  .btn-ghost {
-    width: 100%;
-    padding: 17px 24px;
-    background: var(--surface);
-    color: var(--text);
-    border: none;
-    border-radius: 100px;
-    font-family: var(--font-th);
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .btn-ghost:active { transform: scale(0.97); background: #E8E8EC; }
-  .btn-ghost.selected {
-    background: var(--text);
-    color: white;
-    font-weight: 600;
-  }
-
-  /* ===== PROGRESS BAR ===== */
-  .progress-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 24px 0;
-  }
-  .progress-bar {
-    flex: 1;
-    height: 5px;
-    background: var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--text);
-    border-radius: 10px;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .progress-label {
-    font-family: var(--font-en);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    white-space: nowrap;
-  }
-
-  /* ===== BOTTOM NAV ===== */
-  .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(20px);
-    border-top: 1px solid var(--border);
-    display: flex;
-    padding: 10px 0 24px;
-    z-index: 100;
-  }
-  .nav-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 6px;
-    cursor: pointer;
-    color: #AAAAAA;
-    transition: color 0.2s;
-  }
-  .nav-item.active { color: var(--text); }
-  .nav-item svg { width: 24px; height: 24px; }
-  .nav-item span { font-size: 10px; font-weight: 500; }
-
-  /* ===== TAG CHIPS ===== */
-  .tag {
-    display: inline-block;
-    padding: 4px 12px;
-    background: var(--surface);
-    border-radius: 100px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    white-space: nowrap;
-  }
-  .tag.pink { background: rgba(255,62,165,0.1); color: var(--pink); }
-  .tag.blue { background: rgba(96,207,255,0.15); color: #0099CC; }
-
-  /* ===== SEARCH BAR ===== */
-  .search-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--surface);
-    border-radius: 14px;
-    padding: 12px 16px;
-  }
-  .search-bar input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    font-family: var(--font-th);
-    font-size: 15px;
-    color: var(--text);
-    outline: none;
-  }
-  .search-bar input::placeholder { color: #BBBBBB; }
-
-  /* ===== CARD ===== */
-  .card {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-    border: 1px solid var(--border);
-  }
-
-  /* ===== STARS ===== */
-  .stars { color: #FFBB00; font-size: 13px; letter-spacing: 1px; }
-
-
-  /* ==========================================
-     SCREEN 1: SPLASH
-  ========================================== */
-  #screen-splash {
-    align-items: center;
-    justify-content: center;
-    background: white;
-  }
-  .splash-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    animation: fadeIn 0.8s ease 0.3s both;
-  }
-  .splash-logo .logo { font-size: 28px; }
-  .splash-dots {
-    position: absolute;
-    bottom: 60px;
-    display: flex;
-    gap: 8px;
-    animation: fadeIn 1s ease 1s both;
-  }
-  .splash-dot {
-    width: 8px; height: 8px;
-    background: #DDDDDD;
-    border-radius: 50%;
-  }
-  .splash-dot.active { background: var(--text); }
-
-
-  /* ==========================================
-     SCREEN 2: ONBOARDING
-  ========================================== */
-  #screen-onboard {
-    background: white;
-    justify-content: space-between;
-  }
-  .onboard-blobs {
-    height: 55vw;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .blob-green {
-    width: 211px; height: 211px;
-    /* background: radial-gradient(circle at 40% 40%, #5BF5A0, #22C55E); */
-    /* clip-path: polygon(50% 0%, 61% 25%, 98% 15%, 75% 50%, 98% 85%, 61% 75%, 50% 100%, 39% 75%, 2% 85%, 25% 50%, 2% 15%, 39% 25%); */
-    position: absolute;
-    left: -5vw; top: 5vw;
-    animation: float 6s ease-in-out infinite;
-  }
-  .blob-blue {
-    width: 350px; height: 350px;
-    /* background: radial-gradient(circle at 60% 35%, #A0EEFF, #38BDF8);
-    border-radius: 60% 40% 55% 45% / 50% 60% 40% 55%; */
-    position: absolute;
-    right: -5vw; top: -2vw;
-    animation: float 7s ease-in-out infinite 1s;
-  }
-  .blob-pink {
-    width: 189px; height: 179px;
-    /* background: radial-gradient(circle at 50% 45%, #FF85CC, #FF3EA5);
-    border-radius: 50%; */
-    position: absolute;
-    right: 10vw; bottom: -5vw;
-    animation: float 5s ease-in-out infinite 0.5s;
-  }
-  /* .blob-green {
-    width: 55vw; height: 55vw;
-    background: radial-gradient(circle at 40% 40%, #5BF5A0, #22C55E);
-    clip-path: polygon(50% 0%, 61% 25%, 98% 15%, 75% 50%, 98% 85%, 61% 75%, 50% 100%, 39% 75%, 2% 85%, 25% 50%, 2% 15%, 39% 25%);
-    position: absolute;
-    left: -5vw; top: 5vw;
-    animation: float 6s ease-in-out infinite;
-  }
-  .blob-blue {
-    width: 50vw; height: 50vw;
-    background: radial-gradient(circle at 60% 35%, #A0EEFF, #38BDF8);
-    border-radius: 60% 40% 55% 45% / 50% 60% 40% 55%;
-    position: absolute;
-    right: -5vw; top: -2vw;
-    animation: float 7s ease-in-out infinite 1s;
-  }
-  .blob-pink {
-    width: 42vw; height: 42vw;
-    background: radial-gradient(circle at 50% 45%, #FF85CC, #FF3EA5);
-    border-radius: 50%;
-    position: absolute;
-    right: 10vw; bottom: -5vw;
-    animation: float 5s ease-in-out infinite 0.5s;
-  } */
-  .blob-eye {
-    position: absolute;
-    display: flex;
-    gap: 6px;
-  }
-  .blob-eye span {
-    width: 7px; height: 11px;
-    background: white;
-    border-radius: 50%;
-    display: block;
-  }
-  .onboard-content {
-    padding: 0 28px 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-  .onboard-tagline {
-    text-align: center;
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.4;
-    font-family: var(--font-en);
-  }
-  .onboard-tagline .highlight-green {
-    background: rgba(61, 255, 160, 0.3);
-    border-radius: 6px;
-    padding: 0 4px;
-  }
-  .onboard-tagline .highlight-blue {
-    background: rgba(96, 207, 255, 0.3);
-    border-radius: 6px;
-    padding: 0 4px;
-  }
-  .onboard-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .onboard-link {
-    text-align: center;
-    font-size: 14px;
-    color: var(--text-secondary);
-  }
-  .onboard-link u { color: var(--text); cursor: pointer; }
-
-  /* Logo in top area */
-  .onboard-header {
-    padding: 56px 28px 0;
-    display: flex;
-    justify-content: center;
-  }
-
-
-  /* ==========================================
-     SCREEN 3: VIBE CHECK INTRO
-  ========================================== */
-  #screen-vibeintro {
-    background: white;
-    align-items: center;
-    justify-content: space-between;
-    padding: 60px 28px 48px;
-  }
-  .vibeintro-top {
-    text-align: center;
-    animation: slideUp 0.5s ease both;
-  }
-  .vibeintro-top h2 {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.6;
-    color: var(--text);
-  }
-  .vibeintro-mascot {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    animation: slideUp 0.5s ease 0.1s both;
-  }
-  .mascot-glow {
-    position: absolute;
-    inset: -20px;
-    background: radial-gradient(circle, rgba(255,62,165,0.2) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: pulse-glow 3s ease-in-out infinite;
-  }
-  
-  .mascot-speech {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    border-radius: 18px;
-    padding: 14px 18px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    width: 200px;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.5;
-  }
-  .mascot-speech::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid white;
-  }
-  .mascot-eye-pink {
-    position: absolute;
-    bottom: 68px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 7px;
-    z-index: 2;
-  }
-  .mascot-eye-pink span {
-    width: 7px; height: 11px;
-    background: white;
-    border-radius: 50%;
-    display: block;
-  }
-
-
-  /* ==========================================
-     SCREEN 4-6: QUIZ
-  ========================================== */
-  #screen-q1, #screen-q2, #screen-q3 {
-    background: white;
-    padding-bottom: 40px;
-  }
-  .quiz-body {
-    padding: 32px 24px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-  .quiz-question {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.55;
-    animation: slideUp 0.4s ease both;
-  }
-  .quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    animation: slideUp 0.4s ease 0.1s both;
-  }
-
-
-  /* ==========================================
-     SCREEN 7: HOME
-  ========================================== */
-  #screen-home {
-    background: var(--bg);
-    padding-bottom: 80px;
-  }
-  .home-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 56px 20px 16px;
-  }
-  .home-body { padding: 0 20px; display: flex; flex-direction: column; gap: 24px; }
-
-  .banner-card {
-    background: linear-gradient(135deg, #F0F9FF, #E0F7F0);
-    border-radius: 20px;
-    padding: 20px;
-    min-height: 130px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: relative;
-    overflow: hidden;
-  }
-  .banner-card::before {
-    content: 'VIBES OF WEEK';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    font-family: var(--font-en);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #AAAAAA;
-  }
-  .banner-dots {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 12px;
-  }
-  .banner-dot { width: 6px; height: 6px; background: #CCCCCC; border-radius: 50%; }
-  .banner-dot.active { background: var(--text); width: 16px; }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .section-title { font-size: 15px; font-weight: 800; letter-spacing: 0.5px; font-family: var(--font-en); }
-  .see-all { font-size: 13px; color: var(--text-secondary); font-weight: 500; cursor: pointer; }
-
-  .trending-grid { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
-  .trending-grid::-webkit-scrollbar { display: none; }
-  .trending-item {
-    flex-shrink: 0;
-    width: 120px;
-  }
-  .trending-img {
-    width: 120px; height: 150px;
-    background: var(--surface);
-    border-radius: 14px;
-    margin-bottom: 8px;
-    position: relative;
-    overflow: hidden;
-  }
-  .trending-img-1 { background: linear-gradient(135deg, #FFE4F0, #FFCCE4); }
-  .trending-img-2 { background: linear-gradient(135deg, #E4F0FF, #CCE4FF); }
-  .trending-img-3 { background: linear-gradient(135deg, #E4FFE8, #CCFFCC); }
-  .trending-likes { font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 4px; }
-
-  .creator-row { display: flex; gap: 12px; }
-  .creator-card {
-    flex: 1;
-    background: white;
-    border-radius: 16px;
-    padding: 14px;
-    border: 1px solid var(--border);
-  }
-  .creator-avatar {
-    width: 36px; height: 36px;
-    background: var(--surface);
-    border-radius: 10px;
-    margin-bottom: 8px;
-  }
-  .creator-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
-  .creator-reviews { font-size: 11px; color: var(--text-secondary); margin-bottom: 8px; }
-  .creator-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-  .creator-tag { font-size: 11px; color: var(--text-secondary); }
-
-
-  /* ==========================================
-     SCREEN 8: WARDROBE
-  ========================================== */
-  #screen-wardrobe {
-    background: var(--bg);
-    padding-bottom: 80px;
-  }
-  .wardrobe-header {
-    padding: 56px 20px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .wardrobe-title { font-family: var(--font-en); font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
-  .filter-chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
-  .filter-chips::-webkit-scrollbar { display: none; }
-  .filter-chip {
-    flex-shrink: 0;
-    padding: 7px 16px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 500;
-    background: var(--surface);
-    color: var(--text-secondary);
-    cursor: pointer;
-    white-space: nowrap;
-    border: none;
-  }
-  .filter-chip.active { background: var(--text); color: white; }
-
-  .wardrobe-list { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
-  .product-card {
-    display: flex;
-    gap: 14px;
-    background: white;
-    border-radius: 18px;
-    padding: 14px;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    align-items: center;
-  }
-  .product-img {
-    width: 72px; height: 80px;
-    border-radius: 12px;
-    flex-shrink: 0;
-  }
-  .product-img-1 { background: linear-gradient(135deg, #F3E8FF, #DDD6FE); }
-  .product-img-2 { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
-  .product-img-3 { background: linear-gradient(135deg, #DCFCE7, #BBF7D0); }
-  .product-img-4 { background: linear-gradient(135deg, #FFE4E6, #FECDD3); }
-  .product-info { flex: 1; }
-  .product-rating { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
-  .product-rating .stars { font-size: 11px; }
-  .product-rating span { font-size: 11px; color: var(--text-secondary); }
-  .product-name { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
-  .product-tags { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
-  .product-price { font-size: 14px; font-weight: 700; color: var(--pink); }
-
-
-  /* ==========================================
-     SCREEN 9: LOCAL HUB
-  ========================================== */
-  #screen-local {
-    background: var(--bg);
-    padding-bottom: 80px;
-  }
-  .local-header {
-    padding: 56px 20px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .local-title { font-family: var(--font-en); font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
-  .buddy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 20px; }
-  .buddy-type-card {
-    background: white;
-    border-radius: 18px;
-    padding: 20px 16px;
-    border: 1px solid var(--border);
-    text-align: center;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    min-height: 90px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: all 0.2s;
-  }
-  .buddy-type-card:active { transform: scale(0.97); }
-  .buddy-type-card .icon { font-size: 24px; }
-  .buddy-type-card.t1 { background: linear-gradient(135deg, #FFF0F7, #FFE4F0); }
-  .buddy-type-card.t2 { background: linear-gradient(135deg, #F0F9FF, #E0F2FE); }
-  .buddy-type-card.t3 { background: linear-gradient(135deg, #F0FFF4, #DCFCE7); }
-  .buddy-type-card.t4 { background: linear-gradient(135deg, #FEFCE8, #FEF9C3); }
-
-  .local-body { padding: 20px 20px 0; display: flex; flex-direction: column; gap: 16px; }
-  .nearby-title { font-size: 15px; font-weight: 700; }
-  .nearby-row { display: flex; gap: 12px; }
-  .nearby-card {
-    flex: 1;
-    background: white;
-    border-radius: 16px;
-    padding: 14px;
-    border: 1px solid var(--border);
-  }
-  .nearby-avatar { width: 32px; height: 32px; background: var(--surface); border-radius: 8px; margin-bottom: 8px; }
-  .nearby-handle { font-size: 13px; font-weight: 700; }
-  .nearby-reviews { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
-  .nearby-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-  .nearby-tag { font-size: 10px; color: var(--text-secondary); }
-
-
-  /* ==========================================
-     SCREEN 10: MY VIBE
-  ========================================== */
-  #screen-myvibe {
-    background: var(--bg);
-    padding-bottom: 80px;
-  }
-  .myvibe-header {
-    padding: 56px 20px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .myvibe-title { font-family: var(--font-en); font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
-  .gear-btn { width: 36px; height: 36px; background: var(--surface); border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; }
-
-  .myvibe-body { padding: 0 20px; display: flex; flex-direction: column; gap: 20px; }
-  .profile-card {
-    background: white;
-    border-radius: 18px;
-    padding: 16px;
-    border: 1px solid var(--border);
-  }
-  .profile-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-  .profile-avatar { width: 52px; height: 52px; background: linear-gradient(135deg, #FFE4F0, #FECDD3); border-radius: 16px; }
-  .profile-name { font-size: 16px; font-weight: 700; }
-  .profile-tags { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-  .profile-more { margin-left: auto; font-size: 18px; color: var(--text-secondary); cursor: pointer; }
-  .profile-btns { display: flex; gap: 8px; }
-  .profile-btn {
-    flex: 1;
-    padding: 9px;
-    background: var(--surface);
-    border-radius: 100px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    font-family: var(--font-th);
-  }
-
-  .myvibe-section-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
-  .rental-card {
-    background: white;
-    border-radius: 16px;
-    padding: 14px;
-    border: 1px solid var(--border);
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-  .rental-img { width: 56px; height: 60px; background: linear-gradient(135deg, #FEF3C7, #FDE68A); border-radius: 12px; flex-shrink: 0; }
-  .rental-from { font-size: 10px; color: var(--text-secondary); margin-bottom: 3px; }
-  .rental-name { font-size: 14px; font-weight: 700; }
-  .rental-status { font-size: 12px; color: #22C55E; font-weight: 500; margin-top: 3px; }
-
-  .booking-list { display: flex; flex-direction: column; gap: 10px; }
-  .booking-card {
-    background: white;
-    border-radius: 16px;
-    padding: 14px;
-    border: 1px solid var(--border);
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .booking-img { width: 52px; height: 56px; background: var(--surface); border-radius: 12px; flex-shrink: 0; }
-  .booking-img-1 { background: linear-gradient(135deg, #E0F2FE, #BAE6FD); }
-  .booking-img-2 { background: linear-gradient(135deg, #DCFCE7, #BBF7D0); }
-  .booking-date { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
-  .booking-name { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
-  .booking-actions { display: flex; gap: 8px; }
-  .booking-btn {
-    padding: 6px 16px;
-    border-radius: 100px;
-    font-size: 12px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    font-family: var(--font-th);
-  }
-  .booking-btn.confirm { background: var(--text); color: white; }
-  .booking-btn.cancel { background: var(--surface); color: var(--text-secondary); }
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VIBIT – Find your Vibe. Book your Local.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- SVG LOGO ICON (shared) -->
-<svg style="display:none">
-  <symbol id="vibit-icon" viewBox="0 0 40 40">
-    <circle cx="20" cy="20" r="18" fill="url(#vibGrad)"/>
-    <defs>
-      <radialGradient id="vibGrad" cx="40%" cy="35%">
-        <stop offset="0%" stop-color="#60CFFF"/>
-        <stop offset="100%" stop-color="#38BDF8"/>
-      </radialGradient>
-    </defs>
-    <ellipse cx="14" cy="20" rx="3" ry="4.5" fill="white"/>
-    <ellipse cx="26" cy="20" rx="3" ry="4.5" fill="white"/>
-  </symbol>
-</svg>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <div class="nav-blob" style="animation:blobMorph 4s ease-in-out infinite;"></div>
+      <span>VIBIT</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="interact.html">Try it</a></li>
+      <li><a href="result.html">Vibes</a></li>
+    </ul>
+    <a href="interact.html" class="btn-nav">Start Vibe ✨</a>
+    <button class="hamburger" id="hamburger">☰</button>
+  </nav>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="blob blob-h1"></div>
+    <div class="blob blob-h2"></div>
+    <div class="blob blob-h3"></div>
 
-<!-- ==========================================
-     SCREEN 1: SPLASH
-========================================== -->
-<div class="screen active" id="screen-splash">
-  <div class="splash-logo">
-    <div class="logo">
-      <svg class="logo-icon" viewBox="0 0 40 40"><use href="#vibit-icon"/></svg>
+    <!-- Mascots -->
+    <div class="mascot m-pink float-1">
+      <img src="assets/mascot/blob_pink.png" alt="Pink mascot"
+           onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','pink')"/>
+    </div>
+    <div class="mascot m-blue float-2">
+      <img src="assets/mascot/blob_blue.png" alt="Blue mascot"
+           onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','blue')"/>
+    </div>
+    <div class="mascot m-green float-3">
+      <img src="assets/mascot/blob_green.png" alt="Green mascot"
+           onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','green')"/>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">✦ New Platform Drop ✦</div>
+      <h1 class="hero-title">
+        Find your <span class="highlight-green">Vibe.</span><br/>
+        Book your <span class="highlight-blue">Local.</span>
+      </h1>
+      <p class="hero-sub">
+        แพลตฟอร์มสำหรับนักท่องเที่ยว สายคอนเทนต์<br/>
+        เช่าชุด • หาคู่บัดดี้ • แชร์ไวบ์ ในที่เดียว 🎀
+      </p>
+      <div class="hero-btns">
+        <a href="interact.html" class="btn-primary">Check my Vibe 🔮</a>
+        <a href="how.html" class="btn-ghost">ดูวิธีใช้ →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num" id="statBuddies">0</span>
+          <span class="stat-label">Local Buddies</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" id="statReviews">0</span>
+          <span class="stat-label">Vibe Reviews</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" id="statCities">0</span>
+          <span class="stat-label">Cities</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MINI PREVIEW STRIP -->
+  <section style="padding:64px 24px; background:var(--white); text-align:center;">
+    <div class="section-label">FEATURES</div>
+    <h2 class="section-title">ทำอะไรได้บ้างใน VIBIT?</h2>
+    <p class="section-sub">ครบ จบ ในแอปเดียว</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:860px;margin:0 auto;">
+      <div class="step-card" style="animation:cardPop .5s ease both;">
+        <span style="font-size:2.5rem;display:block;margin-bottom:14px;">👗</span>
+        <h3 style="margin-bottom:8px;">Rent the Look</h3>
+        <p>เช่าชุดเช็กอินสไตล์ที่ใช่ ไม่ต้องซื้อใหม่</p>
+      </div>
+      <div class="step-card" style="animation:cardPop .5s .1s ease both;">
+        <span style="font-size:2.5rem;display:block;margin-bottom:14px;">🤝</span>
+        <h3 style="margin-bottom:8px;">Book the Local</h3>
+        <p>จองบัดดี้คู่ใจ เพื่อนเที่ยว เพื่อนช็อป เพื่อนถ่ายรูป</p>
+      </div>
+      <div class="step-card" style="animation:cardPop .5s .2s ease both;">
+        <span style="font-size:2.5rem;display:block;margin-bottom:14px;">✨</span>
+        <h3 style="margin-bottom:8px;">Vibe Matcher</h3>
+        <p>AI แมตช์ไวบ์ หาสิ่งที่เหมาะกับคุณที่สุด</p>
+      </div>
+      <div class="step-card" style="animation:cardPop .5s .3s ease both;">
+        <span style="font-size:2.5rem;display:block;margin-bottom:14px;">🌱</span>
+        <h3 style="margin-bottom:8px;">Sustainable</h3>
+        <p>คอนเทนต์แบบยั่งยืน ลดการบริโภคเกินพอ</p>
+      </div>
+    </div>
+    <br/><br/>
+    <a href="how.html" class="btn-primary" style="margin-right:12px;">ดูวิธีใช้ →</a>
+    <a href="interact.html" class="btn-ghost">ลองเช็กไวบ์เลย 🎯</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <div class="nav-blob"></div>
       VIBIT
     </div>
-  </div>
-  <div class="splash-dots">
-    <div class="splash-dot active"></div>
-    <div class="splash-dot"></div>
-    <div class="splash-dot"></div>
-  </div>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 2: ONBOARDING
-========================================== -->
-<div class="screen" id="screen-onboard">
-  <div class="onboard-header">
-    <div class="logo">
-      <svg class="logo-icon" viewBox="0 0 40 40"><use href="#vibit-icon"/></svg>
-      VIBIT
+    <p class="footer-tagline">Find your Vibe. Book your Local.</p>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="interact.html">Try Vibe Check</a></li>
+      <li><a href="result.html">Results</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a href="#" class="social-btn" title="Instagram">📸</a>
+      <a href="#" class="social-btn" title="TikTok">🎵</a>
+      <a href="#" class="social-btn" title="Facebook">💙</a>
+      <a href="#" class="social-btn" title="Line">💬</a>
     </div>
-  </div>
+    <p class="footer-copy">© 2025 VIBIT – Student Project. All rights reserved.</p>
+  </footer>
 
-  <div class="onboard-blobs">
-    <!-- <div class="blob-green">
-      <div class="blob-eye" style="bottom:28%;left:28%">
-        <span></span><span></span>
-      </div>
-    </div> -->
-    <img src="blob_green.png" class="blob-green">
-    <!-- <div class="blob-blue">
-      <div class="blob-eye" style="bottom:30%;left:32%">
-        <span></span><span></span>
-      </div>
-    </div> -->
-    <img src="blob_blue.png" class="blob-blue">
-    <!-- <div class="blob-pink">
-      <div class="blob-eye" style="top:32%;left:32%">
-        <span></span><span></span>
-      </div>
-    </div> -->
-    <img src="blob_pink.png" class="blob-pink">
-  </div>
-
-  <div class="onboard-content">
-    <div class="onboard-tagline">
-      Find your <span class="highlight-green">Vibe.</span><br>
-      <span class="highlight-blue">Book</span> your Local.
-    </div>
-    <div class="onboard-actions">
-      <button class="btn-primary" onclick="showScreen('screen-vibeintro')">เข้าสู่ระบบ</button>
-      <div class="onboard-link">ยังไม่มีบัญชี? <u onclick="showScreen('screen-vibeintro')">ลงทะเบียน</u></div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 3: VIBE CHECK INTRO
-========================================== -->
-<div class="screen" id="screen-vibeintro">
-  <div class="vibeintro-top">
-    <h2>ตอบคำถาม 3 ข้อ<br>เพื่อเช็กสไตล์ที่ใช่สำหรับคุณ!</h2>
-  </div>
-
-  <div class="vibeintro-mascot">
-    <div class="mascot-glow"></div>
-    <div class="mascot-speech">
-      มาเช็กสไตล์ที่ใช่<br>ให้เราได้แมตช์<br>สิ่งที่เหมาะกับคุณ
-    </div>
-    <div class="mascot-blob-pink"></div>
-    <div class="mascot-eye-pink">
-      <span></span><span></span>
-    </div>
-  </div>
-
-  <div style="padding: 0 28px 48px;">
-    <button class="btn-primary pink" onclick="showScreen('screen-q1')">เริ่มเลย!</button>
-  </div>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 4: QUIZ Q1
-========================================== -->
-<div class="screen" id="screen-q1">
-  <div class="progress-wrap">
-    <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
-    <span class="progress-label">1/3</span>
-  </div>
-  <div class="quiz-body">
-    <p class="quiz-question">ถ้าจะหาชุดเวลาไปเที่ยว<br>OOTD ของคุณจะเป็นแบบไหนนา?</p>
-    <div class="quiz-options">
-      <button class="btn-ghost" onclick="selectOption(this,'q1');setTimeout(()=>showScreen('screen-q2'),300)">Y2K / ตัวมารดาสับๆ</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q1');setTimeout(()=>showScreen('screen-q2'),300)">มินิมอล / เอิร์ธโทนเกสดี</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q1');setTimeout(()=>showScreen('screen-q2'),300)">สตรีท / ตัวตึงเท่ๆ</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q1');setTimeout(()=>showScreen('screen-q2'),300)">ลูกคุณ / แกล้งๆ ดูแกลม</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 5: QUIZ Q2
-========================================== -->
-<div class="screen" id="screen-q2">
-  <div class="progress-wrap">
-    <div class="progress-bar"><div class="progress-fill" style="width:66%"></div></div>
-    <span class="progress-label">2/3</span>
-  </div>
-  <div class="quiz-body">
-    <p class="quiz-question">เรฟถ่ายรูปลงโซเชียล<br>มู้ดแบบไหนที่เรียกว่าจิ้ง?</p>
-    <div class="quiz-options">
-      <button class="btn-ghost" onclick="selectOption(this,'q2');setTimeout(()=>showScreen('screen-q3'),300)">ดิจิตอล / เปิดแฟลชฟิลเผลอ</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q2');setTimeout(()=>showScreen('screen-q3'),300)">จัดเต็ม / แสงเป๊ะ หน้าเป๊ะ</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q2');setTimeout(()=>showScreen('screen-q3'),300)">โทนฟิล์ม / มู้ดหนัง ซีนอารมณ์</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q2');setTimeout(()=>showScreen('screen-q3'),300)">ไลฟ์สไตล์ / แกล้งเผลอ ปล่อยจอย</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 6: QUIZ Q3
-========================================== -->
-<div class="screen" id="screen-q3">
-  <div class="progress-wrap">
-    <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
-    <span class="progress-label">3/3</span>
-  </div>
-  <div class="quiz-body">
-    <p class="quiz-question">ไปเที่ยวทั้งที<br>กิจกรรมไหนที่ต้องหาทำ?</p>
-    <div class="quiz-options">
-      <button class="btn-ghost" onclick="selectOption(this,'q3');setTimeout(()=>showScreen('screen-home'),400)">คาเฟ่ฮอปปิง / เก็บสปอตฮิต</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q3');setTimeout(()=>showScreen('screen-home'),400)">มุมลับ / ที่ที่คนยังไม่ค่อยไป</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q3');setTimeout(()=>showScreen('screen-home'),400)">ตามรอยเมน / สายคอนเสิร์ต</button>
-      <button class="btn-ghost" onclick="selectOption(this,'q3');setTimeout(()=>showScreen('screen-home'),400)">หนีความวุ่นวาย / ไปฮีลใจ</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 7: HOME
-========================================== -->
-<div class="screen" id="screen-home">
-  <div class="home-header">
-    <div class="logo">
-      <svg class="logo-icon" viewBox="0 0 40 40"><use href="#vibit-icon"/></svg>
-      VIBIT
-    </div>
-    <div class="search-bar" style="flex:1;margin-left:12px;">
-      <svg width="16" height="16" fill="none" stroke="#AAAAAA" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="วันหยุดนี้ไปเที่ยวไหนดี...">
-    </div>
-  </div>
-
-  <div class="home-body">
-    <div>
-      <div class="banner-card">
-        <div class="banner-dots">
-          <div class="banner-dot active"></div>
-          <div class="banner-dot"></div>
-          <div class="banner-dot"></div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="section-header" style="margin-bottom:12px">
-        <span class="section-title">TRENDING LOOKS</span>
-        <span class="see-all">SEE ALL</span>
-      </div>
-      <div class="trending-grid">
-        <div class="trending-item">
-          <div class="trending-img trending-img-1"></div>
-          <div class="trending-likes">❤️ 1.3K</div>
-        </div>
-        <div class="trending-item">
-          <div class="trending-img trending-img-2"></div>
-          <div class="trending-likes">🔖 837</div>
-        </div>
-        <div class="trending-item">
-          <div class="trending-img trending-img-3"></div>
-          <div class="trending-likes">❤️ 429</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="section-header" style="margin-bottom:12px">
-        <span class="section-title">TOP LOCAL CREATORS</span>
-        <span class="see-all">SEE ALL</span>
-      </div>
-      <div class="creator-row">
-        <div class="creator-card">
-          <div class="creator-avatar"></div>
-          <div class="creator-name">@JIDA</div>
-          <div class="creator-reviews">+395 REVIEWS</div>
-          <div class="creator-tags">
-            <span class="creator-tag">#Y2K</span>
-            <span class="creator-tag">#สายแฟ</span>
-            <span class="creator-tag">#คาเฟ่</span>
-            <span class="creator-tag">#บัดดี้</span>
-          </div>
-        </div>
-        <div class="creator-card">
-          <div class="creator-avatar"></div>
-          <div class="creator-name">@BAO</div>
-          <div class="creator-reviews">+198 REVIEWS</div>
-          <div class="creator-tags">
-            <span class="creator-tag">#สตรีท</span>
-            <span class="creator-tag">#Y2K</span>
-            <span class="creator-tag">#ถ่ายรูป</span>
-            <span class="creator-tag">#สายกิน</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <nav class="bottom-nav">
-    <div class="nav-item active" onclick="switchTab('home')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('wardrobe')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('local')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('myvibe')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    </div>
-  </nav>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 8: WARDROBE
-========================================== -->
-<div class="screen" id="screen-wardrobe">
-  <div class="wardrobe-header">
-    <div class="wardrobe-title">EXPLORE WARDROBE</div>
-    <div class="search-bar">
-      <svg width="16" height="16" fill="none" stroke="#AAAAAA" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="วันหยุดนี้ไปเที่ยวไหนดี...">
-    </div>
-    <div class="filter-chips">
-      <button class="filter-chip active">ติดดาว</button>
-      <button class="filter-chip">หมวดหมู่</button>
-      <button class="filter-chip">โลเคชั่น</button>
-      <button class="filter-chip">ติดเทรนด์</button>
-      <button class="filter-chip">ราคา</button>
-    </div>
-  </div>
-
-  <div class="wardrobe-list">
-    <div class="product-card">
-      <div class="product-img product-img-1"></div>
-      <div class="product-info">
-        <div class="product-rating"><span class="stars">★★★★</span><span class="stars" style="color:#DDD">★</span><span>4.9 (120 รีวิว)</span></div>
-        <div class="product-name">Mute.Studio</div>
-        <div class="product-tags">#เอิร์ธโทน #เช่าชุดมินิมอล #กาเฟ่ออปิ้ง</div>
-        <div class="product-price">เริ่มต้น ฿150 (ต่อวัน)</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img product-img-2"></div>
-      <div class="product-info">
-        <div class="product-rating"><span class="stars">★★★★★</span><span>5.0 (340 รีวิว)</span></div>
-        <div class="product-name">Sony Cyber-shot</div>
-        <div class="product-tags">#กล้องดิจิทัลเก่า #เช่ากล้องวินเทจ</div>
-        <div class="product-price">เริ่มต้น ฿200 (ต่อวัน)</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img product-img-3"></div>
-      <div class="product-info">
-        <div class="product-rating"><span class="stars">★★★★</span><span class="stars" style="color:#DDD">★</span><span>4.8 (215 รีวิว)</span></div>
-        <div class="product-name">Frosty.Fit</div>
-        <div class="product-tags">#เช่าชุดกันหนาว #ขึ้นดอย #แฟหน้าหนาว</div>
-        <div class="product-price">เริ่มต้น ฿250 (ต่อวัน)</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img product-img-4"></div>
-      <div class="product-info">
-        <div class="product-rating"><span class="stars">★★★★</span><span class="stars" style="color:#DDD">★</span><span>4.9 (85 รีวิว)</span></div>
-        <div class="product-name">LuxeLend.BKK</div>
-        <div class="product-tags">#ดินเนอร์รูฟท็อป</div>
-        <div class="product-price">เริ่มต้น ฿300 (ต่อวัน)</div>
-      </div>
-    </div>
-  </div>
-
-  <nav class="bottom-nav">
-    <div class="nav-item" onclick="switchTab('home')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    </div>
-    <div class="nav-item active" onclick="switchTab('wardrobe')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('local')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('myvibe')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    </div>
-  </nav>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 9: LOCAL HUB
-========================================== -->
-<div class="screen" id="screen-local">
-  <div class="local-header">
-    <div class="local-title">LOCAL HUB</div>
-    <div class="search-bar">
-      <svg width="16" height="16" fill="none" stroke="#AAAAAA" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="กำลังหาบัดดี้แบบไหน?">
-    </div>
-  </div>
-
-  <div class="buddy-grid">
-    <div class="buddy-type-card t1"><span class="icon">✈️</span>เพื่อนเที่ยว</div>
-    <div class="buddy-type-card t2"><span class="icon">🛍️</span>เพื่อนช้อป</div>
-    <div class="buddy-type-card t3"><span class="icon">🍜</span>เพื่อนกิน</div>
-    <div class="buddy-type-card t4"><span class="icon">📸</span>เพื่อนถ่ายรูป</div>
-  </div>
-
-  <div class="local-body">
-    <div class="nearby-title">บัดดี้ใกล้ๆ คุณ</div>
-    <div class="nearby-row">
-      <div class="nearby-card">
-        <div class="nearby-avatar"></div>
-        <div class="nearby-handle">@JIDA</div>
-        <div class="nearby-reviews">+395 REVIEWS</div>
-        <div class="nearby-tags">
-          <span class="nearby-tag">#Y2K #สายแฟ</span><br>
-          <span class="nearby-tag">#คาเฟ่ #บัดดี้</span>
-        </div>
-      </div>
-      <div class="nearby-card">
-        <div class="nearby-avatar"></div>
-        <div class="nearby-handle">@BAO</div>
-        <div class="nearby-reviews">+198 REVIEWS</div>
-        <div class="nearby-tags">
-          <span class="nearby-tag">#สตรีท #Y2K</span><br>
-          <span class="nearby-tag">#ถ่ายรูป #สายกิน</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <nav class="bottom-nav">
-    <div class="nav-item" onclick="switchTab('home')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('wardrobe')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
-    </div>
-    <div class="nav-item active" onclick="switchTab('local')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('myvibe')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    </div>
-  </nav>
-</div>
-
-
-<!-- ==========================================
-     SCREEN 10: MY VIBE
-========================================== -->
-<div class="screen" id="screen-myvibe">
-  <div class="myvibe-header">
-    <div class="myvibe-title">MY VIBE</div>
-    <div class="gear-btn">⚙️</div>
-  </div>
-
-  <div class="myvibe-body">
-    <div class="profile-card">
-      <div class="profile-top">
-        <div class="profile-avatar"></div>
-        <div>
-          <div class="profile-name">จีด้าาาา</div>
-          <div class="profile-tags">บัดดี้ • #สายแฟ #เพื่อนเที่ยว #ชิลล์</div>
-        </div>
-        <div class="profile-more">···</div>
-      </div>
-      <div class="profile-btns">
-        <button class="profile-btn">โปรไฟล์</button>
-        <button class="profile-btn">เปลี่ยนรูปแบบบัญชี</button>
-      </div>
-    </div>
-
-    <div>
-      <div class="myvibe-section-title">สถานะการเช่าชุด/อุปกรณ์</div>
-      <div class="rental-card">
-        <div class="rental-img"></div>
-        <div>
-          <div class="rental-from">จากร้าน Sony Cyber-shot</div>
-          <div class="rental-name">กล้อง SONY X100VI</div>
-          <div class="rental-status">● กำลังใช้งาน</div>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="myvibe-section-title">คิวนัดหมายบัดดี้คู่ใจ</div>
-      <div class="booking-list">
-        <div class="booking-card">
-          <div class="booking-img booking-img-1"></div>
-          <div>
-            <div class="booking-date">13 Nov | 14:00 - 16:00 น.</div>
-            <div class="booking-name">ทาย ที่ Street & Cafe Spe...</div>
-            <div class="booking-actions">
-              <button class="booking-btn confirm">ทักแชตไลน์</button>
-              <button class="booking-btn cancel">ยกเลิก</button>
-            </div>
-          </div>
-        </div>
-        <div class="booking-card">
-          <div class="booking-img booking-img-2"></div>
-          <div>
-            <div class="booking-date">13 Nov | 20:00 - 22:00 น.</div>
-            <div class="booking-name">เปา ที่ Limono Shop</div>
-            <div class="booking-actions">
-              <button class="booking-btn confirm">ทักแชตไลน์</button>
-              <button class="booking-btn cancel">ยกเลิก</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <nav class="bottom-nav">
-    <div class="nav-item" onclick="switchTab('home')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('wardrobe')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
-    </div>
-    <div class="nav-item" onclick="switchTab('local')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-    </div>
-    <div class="nav-item active" onclick="switchTab('myvibe')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    </div>
-  </nav>
-</div>
-
-
-<script>
-  // Auto advance splash
-  setTimeout(() => showScreen('screen-onboard'), 2000);
-
-  function showScreen(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo(0, 0);
-  }
-
-  function selectOption(btn, group) {
-    document.querySelectorAll(`#screen-${group === 'q1' ? 'q1' : group === 'q2' ? 'q2' : 'q3'} .btn-ghost`).forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  }
-
-  function switchTab(tab) {
-    const map = {
-      home: 'screen-home',
-      wardrobe: 'screen-wardrobe',
-      local: 'screen-local',
-      myvibe: 'screen-myvibe'
-    };
-    showScreen(map[tab]);
-  }
-</script>
+  <script src="script.js"></script>
+  <script>
+    // Animate stats counter on load
+    animateCounter('statBuddies', 2400);
+    animateCounter('statReviews', 890);
+    animateCounter('statCities', 40);
+  </script>
 </body>
 </html>
