@@ -1,7 +1,32 @@
 /* ============================================
    VIBIT – Global Stylesheet
    ============================================ */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Syne:wght@700;800&display=swap');
+/* แทน @import บนสุดของ style.css */
+/* ต้องเป็นบรรทัดแรกสุดเลย */
+@font-face {
+  font-family: 'LINE Seed Sans TH';
+  src: url('assets/fonts/LINESeedSansTH_W_Rg.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LINE Seed Sans TH';
+  src: url('assets/fonts/LINESeedSansTH_W_Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'LINE Seed Sans TH';
+  src: url('assets/fonts/LINESeedSansTH_W_XBd.woff2') format('woff2');
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Syne เฉพาะ display/หัวข้อภาษาอังกฤษ */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 
 /* ---- CSS Variables ---- */
 :root {
@@ -24,8 +49,12 @@
   --shadow-sm:  0 2px 12px rgba(0,0,0,0.06);
   --shadow-md:  0 8px 32px rgba(0,0,0,0.10);
   --shadow-lg:  0 16px 48px rgba(0,0,0,0.13);
-  --font-main:  'Nunito', sans-serif;
-  --font-display: 'Syne', sans-serif;
+ --font-main:    'LINE Seed Sans TH', sans-serif;
+  --font-display: 'Syne', 'LINE Seed Sans TH', sans-serif;
+  html {
+  font-family: var(--font-main); /* เพิ่มบรรทัดนี้ */
+}
+
   --nav-h:      68px;
 }
 
