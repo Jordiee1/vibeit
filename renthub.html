@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rent Hub – VIBIT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="rent-hub.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <div class="nav-blob" style="animation:blobMorph 4s ease-in-out infinite;"></div>
+      <span>VIBIT</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="renthub.html" class="active">Rent Hub</a></li>
+      <li><a href="vibehow.html">How it works</a></li>
+      <li><a href="interact.html">Try it</a></li>
+      <li><a href="result.html">Vibes</a></li>
+    </ul>
+    <a href="interact.html" class="btn-nav">Start Vibe ✨</a>
+    <button class="hamburger" id="hamburger">☰</button>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- ══════════════════════════════════
+         HERO BANNER
+    ═══════════════════════════════════ -->
+    <section class="rh-hero">
+      <div class="rh-hero-blob rh-blob-1"></div>
+      <div class="rh-hero-blob rh-blob-2"></div>
+      <div class="rh-hero-blob rh-blob-3"></div>
+
+      <div class="mascot rh-mascot-1 float-1">
+        <img src="assets/mascot/blob_pink.png" alt=""
+             onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','pink')"/>
+      </div>
+      <div class="mascot rh-mascot-2 float-3">
+        <img src="assets/mascot/blob_blue.png" alt=""
+             onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','blue')"/>
+      </div>
+
+      <div class="rh-hero-content">
+        <div class="rh-hero-eyebrow">RENT HUB 🛍️</div>
+        <h1 class="rh-hero-title">
+          <span class="highlight-pink">หาของที่ใช่</span><br/>
+          <span class="highlight-blue">เช่าของที่ชอบ</span>
+        </h1>
+        <p class="rh-hero-sub">ร้านเช่าชุด กล้อง พร็อบ และอุปกรณ์ถ่ายรูป<br/>คัดสรรแล้วจากทั่วประเทศ ✅</p>
+
+        <!-- Hero Search -->
+        <div class="rh-search-bar">
+          <span class="rh-search-icon">🔍</span>
+          <input
+            type="text"
+            id="heroSearch"
+            placeholder="ค้นหาร้าน ชุด กล้อง หรือจังหวัด..."
+            autocomplete="off"
+          />
+          <button onclick="RentHub.handleHeroSearch()">ค้นหา</button>
+        </div>
+
+        <!-- Quick province pills -->
+        <div class="rh-province-pills" id="quickProvinces">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         POP! OOTDs FEATURE SECTION
+    ═══════════════════════════════════ -->
+    <section class="rh-section rh-feature-section">
+      <div class="rh-feature-grid">
+
+        <!-- Left: Featured store -->
+        <div class="rh-feature-left">
+          <div class="rh-feature-label">
+            <span>POP! OOTDs?</span>
+            <span class="rh-feature-sub">ชุดเช่าที่ถูกใจเยอะที่สุด</span>
+          </div>
+          <div class="rh-feature-card" id="featuredStoreCard">
+            <!-- Populated by JS -->
+          </div>
+          <div class="rh-feature-more">
+            <span>มองหาสไตล์ที่ใกล้เคียง</span>
+            <button class="rh-more-btn" onclick="RentHub.showSimilar()">+ ดูเพิ่มเติม</button>
+          </div>
+        </div>
+
+        <!-- Right: Buddy match promo -->
+        <div class="rh-feature-right">
+          <div class="rh-promo-card">
+            <div class="rh-promo-badge">✨ แนะนำสำหรับคุณ</div>
+            <div class="rh-promo-emoji">🎯</div>
+            <h3>ยังไม่รู้ว่าชอบสไตล์ไหน?</h3>
+            <p>ทำ Vibe Check ก่อน แล้วให้เราแนะนำร้านที่ตรงกับ vibe ของคุณเลย!</p>
+            <div class="rh-promo-store-tag">
+              <span>🏪 ร้าน VIBIT สาขาเพชรบุรี</span>
+            </div>
+            <a href="interact.html" class="btn-primary" style="width:100%;justify-content:center;margin-top:16px;">
+              เช็กไวบ์ก่อน! 🔮
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         FILTER BAR
+    ═══════════════════════════════════ -->
+    <section class="rh-section rh-filter-section" id="storeList">
+      <div class="rh-filter-bar">
+
+        <!-- Category tabs -->
+        <div class="rh-cat-tabs" id="catTabs">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Right side controls -->
+        <div class="rh-filter-controls">
+          <button class="rh-location-btn" id="locationBtn" onclick="RentHub.toggleProvinceDropdown()">
+            📍 <span id="selectedProvince">ทั้งหมด</span>
+            <span class="rh-chevron">▾</span>
+          </button>
+
+          <!-- Province dropdown -->
+          <div class="rh-province-dropdown" id="provinceDropdown">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="rh-sort-wrap">
+            <select id="sortSelect" onchange="RentHub.handleSort(this.value)">
+              <option value="default">เรียงตาม: แนะนำ</option>
+              <option value="rating">คะแนนสูงสุด</option>
+              <option value="reviews">รีวิวมากสุด</option>
+              <option value="price_asc">ราคา: น้อย→มาก</option>
+              <option value="price_desc">ราคา: มาก→น้อย</option>
+            </select>
+          </div>
+
+          <button class="rh-filter-btn" onclick="RentHub.openFilter()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+            </svg>
+            ตัวกรอง
+            <span class="rh-filter-count" id="filterCount" style="display:none">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active filters display -->
+      <div class="rh-active-filters" id="activeFilters"></div>
+
+      <!-- Result count -->
+      <div class="rh-result-meta" id="resultMeta"></div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         STORE LISTING  (grouped by category)
+    ═══════════════════════════════════ -->
+    <section class="rh-section">
+
+      <!-- Grouped view (default) -->
+      <div id="groupedView">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Flat search results view -->
+      <div id="flatView" style="display:none">
+        <div class="rh-grid" id="flatGrid"></div>
+        <div class="rh-load-more" id="loadMoreWrap" style="display:none">
+          <button class="btn-ghost" onclick="RentHub.loadMore()">โหลดเพิ่มเติม ↓</button>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="rh-empty" id="emptyState" style="display:none">
+        <div class="rh-empty-mascot">
+          <div class="mascot-fallback blue" style="width:100px;height:100px;margin:0 auto;border-radius:60% 40% 55% 45% / 50% 60% 40% 50%;position:relative;display:flex;align-items:center;justify-content:center;font-size:1rem;color:white;font-weight:900;">• •</div>
+        </div>
+        <h3>ไม่พบร้านที่ค้นหา 😢</h3>
+        <p>ลองเปลี่ยนคีย์เวิร์ด หรือเลือกหมวดหมู่ใหม่ดูนะ</p>
+        <button class="btn-ghost" onclick="RentHub.resetAll()">🔄 รีเซ็ตตัวกรอง</button>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════
+         TRENDING SECTION
+    ═══════════════════════════════════ -->
+    <section class="rh-section rh-trending-section">
+      <div class="rh-section-header">
+        <div>
+          <div class="section-label">🔥 TRENDING NOW</div>
+          <h2 class="rh-section-title">ร้านยอดนิยมสัปดาห์นี้</h2>
+        </div>
+        <button class="rh-see-more" onclick="RentHub.showAllTrending()">ดูทั้งหมด →</button>
+      </div>
+      <div class="rh-scroll-row" id="trendingRow">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+  </div><!-- /page-wrap -->
+
+  <!-- ══════════════════════════════════
+       STORE DETAIL MODAL
+  ═══════════════════════════════════ -->
+  <div class="rh-modal-overlay" id="modalOverlay" onclick="RentHub.closeModal(event)">
+    <div class="rh-modal" id="storeModal">
+      <button class="rh-modal-close" onclick="RentHub.closeModal()">✕</button>
+      <div class="rh-modal-body" id="modalBody">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       FILTER DRAWER
+  ═══════════════════════════════════ -->
+  <div class="rh-drawer-overlay" id="drawerOverlay" onclick="RentHub.closeFilter()"></div>
+  <div class="rh-drawer" id="filterDrawer">
+    <div class="rh-drawer-header">
+      <h3>ตัวกรองเพิ่มเติม</h3>
+      <button onclick="RentHub.closeFilter()">✕</button>
+    </div>
+    <div class="rh-drawer-body">
+      <div class="rh-drawer-section">
+        <label class="rh-drawer-label">ช่วงราคา (บาท/วัน)</label>
+        <div class="rh-price-range">
+          <input type="number" id="priceMin" placeholder="ต่ำสุด" min="0" value=""/>
+          <span>–</span>
+          <input type="number" id="priceMax" placeholder="สูงสุด" min="0" value=""/>
+        </div>
+      </div>
+      <div class="rh-drawer-section">
+        <label class="rh-drawer-label">คะแนนขั้นต่ำ</label>
+        <div class="rh-star-filter" id="starFilter">
+          <button class="rh-star-btn active" data-val="0" onclick="RentHub.setStarFilter(0,this)">ทั้งหมด</button>
+          <button class="rh-star-btn" data-val="4" onclick="RentHub.setStarFilter(4,this)">4.0+⭐</button>
+          <button class="rh-star-btn" data-val="4.5" onclick="RentHub.setStarFilter(4.5,this)">4.5+⭐</button>
+          <button class="rh-star-btn" data-val="4.8" onclick="RentHub.setStarFilter(4.8,this)">4.8+⭐</button>
+        </div>
+      </div>
+      <div class="rh-drawer-section">
+        <label class="rh-drawer-label">แสดงเฉพาะ</label>
+        <div class="rh-toggle-row">
+          <label class="rh-toggle">
+            <input type="checkbox" id="toggleNew" onchange="RentHub.applyFilters()"/>
+            <span class="rh-toggle-slider"></span>
+            ร้านใหม่ 🆕
+          </label>
+          <label class="rh-toggle">
+            <input type="checkbox" id="toggleTrending" onchange="RentHub.applyFilters()"/>
+            <span class="rh-toggle-slider"></span>
+            กำลังเทรนด์ 🔥
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="rh-drawer-footer">
+      <button class="btn-ghost" onclick="RentHub.resetFilters()">รีเซ็ต</button>
+      <button class="btn-primary" onclick="RentHub.applyFilters();RentHub.closeFilter()">ดูผลลัพธ์</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><div class="nav-blob"></div>VIBIT</div>
+    <p class="footer-tagline">Find your Vibe. Book your Local.</p>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+  
+      <li><a href="vibehow.html">How it works</a></li>
+      <li><a href="interact.html">Try Vibe Check</a></li>
+      <li><a href="renthub.html">Rent Hub</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a href="#" class="social-btn">📸</a>
+      <a href="#" class="social-btn">🎵</a>
+      <a href="#" class="social-btn">💙</a>
+      <a href="#" class="social-btn">💬</a>
+    </div>
+    <p class="footer-copy">© 2025 VIBIT – Student Project.</p>
+  </footer>
+
+ <script src="data/stores.js" defer></script>
+<script src="script.js" defer></script>
+<script src="rent-hub.js" defer></script>
+</body>
+</html>
