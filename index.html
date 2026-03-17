@@ -14,20 +14,40 @@
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-logo">
-      <div class="nav-blob" style="animation:blobMorph 4s ease-in-out infinite;"></div>
-      <span>VIBIT</span>
+      <img src="assets/images/logo.svg" alt="">
     </div>
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="vibehow.html">How it works</a></li>
-      <li><a href="interact.html">Try it</a></li>
-      <li><a href="result.html">Vibes</a></li>
-      <li><a href="renthub.html">Rent Hub</a></li>
+      <li><a href="index.html" class="active">หน้าหลัก</a></li>
+      <li><a href="renthub.html">แหล่งรวมร้านเช่า</a></li>
+      <li><a href="localhub.html">แหล่งรวมบัดดี้</a></li>
+      <li><a href="vibehow.html">วิธีใช้งาน</a></li>
+      <!-- <li><a href="vibehow.html">How it works</a></li> -->
+      <!-- <li><a href="interact.html">Try it</a></li> -->
+      <!-- <li><a href="result.html">Vibes</a></li> -->
+      <!-- <li><a href="renthub.html">Rent Hub</a></li> -->
     </ul>
-    <a href="interact.html" class="btn-nav">Start Vibe ✨</a>
+    <a href="interact.html" class="btn-nav">เข้าสู่ระบบด้วย LINE</a>
     <button class="hamburger" id="hamburger">☰</button>
   </nav>
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div class="nav-logo">
+        <img src="assets/images/logo.svg" alt="VIBIT" onerror="this.src=''; this.alt='VIBIT';">
+      </div>
+      <button class="menu-close" id="menuClose">✕</button>
+    </div>
+    
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="active">หน้าหลัก</a></li>
+      <li><a href="renthub.html">แหล่งรวมร้านเช่า</a></li>
+      <li><a href="localhub.html">แหล่งรวมบัดดี้</a></li>
+      <li><a href="vibehow.html">วิธีใช้งาน</a></li>
+    </ul>
 
+    <div class="mobile-menu-footer">
+      <a href="interact.html" class="btn-primary" style="width: 100%; justify-content: center; background: #06C755;">เข้าสู่ระบบด้วย LINE</a>
+    </div>
+  </div>
   <!-- HERO -->
   <section class="hero">
     <div class="blob blob-h1"></div>
@@ -36,103 +56,214 @@
 
     <!-- Mascots -->
     <div class="mascot m-pink float-1">
-      <img src="assets/mascot/blob_pink.png" alt="Pink mascot"
+      <img src="assets/images/mas-r.png" alt="Pink mascot"
            onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','pink')"/>
     </div>
     <div class="mascot m-blue float-2">
-      <img src="assets/mascot/blob_blue.png" alt="Blue mascot"
+      <img src="assets/images/mas-b.png" alt="Blue mascot"
            onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','blue')"/>
     </div>
     <div class="mascot m-green float-3">
-      <img src="assets/mascot/blob_green.png" alt="Green mascot"
+      <img src="assets/images/mas-g.png" alt="Green mascot"
            onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','green')"/>
     </div>
 
     <div class="hero-content">
-      <div class="hero-badge">✦ New Platform Drop ✦</div>
+      <!-- <div class="hero-badge">✦ New Platform Drop ✦</div> -->
       <h1 class="hero-title">
         Find your <span class="highlight-green">Vibe.</span><br/>
-        Book your <span class="highlight-blue">Local.</span>
+        <span class="highlight-blue">Book</span> your Local.
       </h1>
       <p class="hero-sub">
         แพลตฟอร์มสำหรับนักท่องเที่ยว สายคอนเทนต์<br/>
-        เช่าชุด • หาคู่บัดดี้ • แชร์ไวบ์ ในที่เดียว 🎀
+        <b>เช่าชุด • หาคู่บัดดี้ • แชร์ไวบ์</b> ในที่เดียว 
       </p>
       <div class="hero-btns">
-        <a href="interact.html" class="btn-primary">Check my Vibe 🔮</a>
-        <a href="vibehow.html" class="btn-ghost">ดูวิธีใช้ →</a>
+        <a href="#" class="btn-primary btn-line">เข้าสู่ระบบด้วย LINE</a>
+        <a href="interact.html" class="btn-ghost">แบบทดสอบหาสไตล์ที่ใช่ <span class="new-tag">ใหม่!</span></a>
       </div>
       <div class="hero-stats">
         <div class="stat">
           <span class="stat-num" id="statBuddies">0</span>
-          <span class="stat-label">Local Buddies</span>
+          <span class="stat-label">รีวิว</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat">
           <span class="stat-num" id="statReviews">0</span>
-          <span class="stat-label">Vibe Reviews</span>
+          <span class="stat-label">บัดดี้</span>
         </div>
         <div class="stat-divider"></div>
         <div class="stat">
           <span class="stat-num" id="statCities">0</span>
-          <span class="stat-label">Cities</span>
+          <span class="stat-label">สถานที่</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- MINI PREVIEW STRIP -->
-  <section style="padding:64px 24px; background:var(--white); text-align:center;">
+  <section style="padding:124px 24px; background:var(--white); text-align:center;">
     <div class="section-label">FEATURES</div>
     <h2 class="section-title">ทำอะไรได้บ้างใน VIBIT?</h2>
-    <p class="section-sub">ครบ จบ ในแอปเดียว</p>
+    <p class="section-sub">ครบจบในแพลตฟอร์มเดียว</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:860px;margin:0 auto;">
       <div class="step-card" style="animation:cardPop .5s ease both;">
-        <span style="font-size:2.5rem;display:block;margin-bottom:14px;">👗</span>
+        <img src="assets/images/pp1.png" alt="">
         <h3 style="margin-bottom:8px;">Rent the Look</h3>
         <p>เช่าชุดเช็กอินสไตล์ที่ใช่ ไม่ต้องซื้อใหม่</p>
       </div>
       <div class="step-card" style="animation:cardPop .5s .1s ease both;">
-        <span style="font-size:2.5rem;display:block;margin-bottom:14px;">🤝</span>
+        <img src="assets/images/pp2.png" alt="">
         <h3 style="margin-bottom:8px;">Book the Local</h3>
         <p>จองบัดดี้คู่ใจ เพื่อนเที่ยว เพื่อนช็อป เพื่อนถ่ายรูป</p>
       </div>
       <div class="step-card" style="animation:cardPop .5s .2s ease both;">
-        <span style="font-size:2.5rem;display:block;margin-bottom:14px;">✨</span>
+        <img src="assets/images/pp3.png" alt="">
         <h3 style="margin-bottom:8px;">Vibe Matcher</h3>
         <p>AI แมตช์ไวบ์ หาสิ่งที่เหมาะกับคุณที่สุด</p>
       </div>
-      <div class="step-card" style="animation:cardPop .5s .3s ease both;">
+      <!-- <div class="step-card" style="animation:cardPop .5s .3s ease both;">
         <span style="font-size:2.5rem;display:block;margin-bottom:14px;">🌱</span>
         <h3 style="margin-bottom:8px;">Sustainable</h3>
         <p>คอนเทนต์แบบยั่งยืน ลดการบริโภคเกินพอ</p>
-      </div>
+      </div> -->
     </div>
-    <br/><br/>
+    <!-- <br/><br/>
     <a href="vibehow.html" class="btn-primary" style="margin-right:12px;">ดูวิธีใช้ →</a>
-    <a href="interact.html" class="btn-ghost">ลองเช็กไวบ์เลย 🎯</a>
+    <a href="interact.html" class="btn-ghost">ลองเช็กไวบ์เลย 🎯</a> -->
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">
-      <div class="nav-blob"></div>
-      VIBIT
+  <section class="vibe-week-section">
+    <div class="blob blob-vibe"></div>
+    <div class="section-header text-center">
+      <span class="section-label badge-pink">VOTW</span>
+      <h2 class="section-title">VIBE OF THE WEEK</h2>
+      <p class="section-sub">สถานที่และสไตล์ยอดฮิตประจำสัปดาห์</p>
     </div>
-    <p class="footer-tagline">Find your Vibe. Book your Local.</p>
-    <ul class="footer-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="vibehow.html">How it works</a></li>
-      <li><a href="interact.html">Try Vibe Check</a></li>
-      <li><a href="result.html">Results</a></li>
-    </ul>
-    <div class="footer-socials">
-      <a href="#" class="social-btn" title="Instagram">📸</a>
-      <a href="#" class="social-btn" title="TikTok">🎵</a>
-      <a href="#" class="social-btn" title="Facebook">💙</a>
-      <a href="#" class="social-btn" title="Line">💬</a>
+
+    <div class="vibe-carousel-wrapper">
+      <div class="vibe-card">
+        <div class="vibe-info">
+          <div style="display: flex; gap: 12px; margin-bottom: 24px;
+    align-items: center;">
+          <div class="vibe-match-badge">
+            <img src="assets/images/crown.svg" alt=""> มาแรงอันดับ 1
+          </div> 107 คน แนะนำสถานที่นี้
+          </div>
+          <h3 class="vibe-title">ถ่ายรูปด้วยกล้องเก่า <br>
+แถวทะเลภาคใต้</h3>
+          <p class="vibe-location">
+            <img src="assets/images/location.svg" alt="">
+            เกาะพีพี, กระบี่
+          </p>
+          <div class="vibe-actions" style="margin-top: 180px;">
+            <a href="#" class="btn-pill">บันทึกสถานที่</a>
+            <a href="#" class="btn-pill outline">ดูเพิ่มเติม</a>
+          </div>
+        </div>
+        <div class="vibe-image">
+          <img src="assets/images/q1.png" alt="Vibe of the week">
+          <div class="vibe-tags-float">
+            <img src="assets/images/cmt.svg" alt="">
+            <!-- <span class="tag-float blue">Cafe Hopping</span>
+            <span class="tag-float green">Minimal</span> -->
+          </div>
+        </div>
+      </div>
+      <button class="slider-arrow right">›</button>
     </div>
-    <p class="footer-copy">© 2025 VIBIT – Student Project. All rights reserved.</p>
+  </section>
+
+  <section class="pop-ootd-section">
+    <div class="blob blob-ootd"></div>
+    <div class="section-header text-center">
+      <span class="badge badge-green">HOT</span>
+      <h2 class="section-title">POP OOTDs</h2>
+      <p class="section-sub">รวมชุดเช่าสุดปัง ถูกใจสายคอนเทนต์</p>
+    </div>
+
+    <div class="ootd-controls">
+      <div class="gender-toggle">
+        <div class="toggle-slider"></div>
+        <button class="toggle-btn active" data-gender="male">ชาย</button>
+        <button class="toggle-btn" data-gender="female">หญิง</button>
+      </div>
+    </div>
+
+    <div class="ootd-carousel-wrapper">
+      <div class="ootd-grid" id="ootdGrid">
+        </div>
+      <button class="slider-arrow right">›</button>
+    </div>
+
+    <div class="text-center" style="margin-top: 40px;">
+      <a href="#" class="btn-primary btn-green-solid">ดูทั้งหมด</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="assets/images/logo.svg" alt="VIBIT Logo">
+        </a>
+        <p class="footer-tagline">
+          แพลตฟอร์มสำหรับนักท่องเที่ยว สายคอนเทนต์<br>
+          เช่าชุด • หาคู่บัดดี้ • แชร์ไวบ์ ในที่เดียว
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.325V1.325C24 .597 23.403 0 22.675 0z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Line">
+            <svg viewBox="0 0 24 24"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988 2.595h-2.392c-.217 0-.392-.176-.392-.392v-4.305c0-.217.175-.392.392-.392h2.392c.217 0 .392.176.392.392v4.305c0 .216-.175.392-.392.392zm5.753-1.569c0 .217-.175.392-.392.392h-2.392c-.217 0-.392-.176-.392-.392v-4.305c0-.217.175-.392.392-.392h.784c.217 0 .392.176.392.392v3.128h1.216c.217 0 .392.176.392.392v.785zm3.725 1.569h-.784c-.217 0-.392-.176-.392-.392v-4.305c0-.217.175-.392.392-.392h.784c.217 0 .392.176.392.392v4.305c0 .216-.175.392-.392.392zm4.51 0h-2.392c-.217 0-.392-.176-.392-.392v-4.305c0-.217.175-.392.392-.392h.784c.217 0 .392.176.392.392v2.353l1.216-2.614c.089-.193.284-.331.503-.331h.71c.328 0 .524.364.339.643l-1.549 2.308 1.638 2.553c.196.305-.024.71-.384.71h-.735c-.144 0-.28-.08-.358-.212l-1.127-1.905v1.408c0 .216-.175.392-.392.392z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">เมนูหลัก</h4>
+        <ul class="footer-links-list">
+          <li><a href="index.html">หน้าหลัก</a></li>
+          <li><a href="#">แหล่งรวมร้านเช่า</a></li>
+          <li><a href="#">แหล่งรวมบัดดี้</a></li>
+          <li><a href="#">วิธีใช้งาน</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">ฟีเจอร์เด่น</h4>
+        <ul class="footer-links-list">
+          <li><a href="interact.html">Vibe Check (ใหม่!)</a></li>
+          <li><a href="result.html">ค้นหาผลลัพธ์</a></li>
+          <li><a href="#">Vibe of the week</a></li>
+          <li><a href="#">POP OOTDs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">ติดต่อเรา</h4>
+        <ul class="footer-links-list">
+          <li><a href="mailto:hello@vibit.com">hello@vibit.com</a></li>
+          <li><a href="#">ศูนย์ช่วยเหลือ</a></li>
+          <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
+          <li><a href="#">ข้อตกลงและเงื่อนไข</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 VIBIT – Interactive Application Design Student Project. All rights reserved.</p>
+      <div class="footer-legal">
+        <span>Made with ♡ in Bangkok</span>
+      </div>
+    </div>
   </footer>
 
   <script src="script.js"></script>
@@ -141,6 +272,99 @@
     animateCounter('statBuddies', 2400);
     animateCounter('statReviews', 890);
     animateCounter('statCities', 40);
+  </script>
+
+  <script>
+    // Data จำลองสำหรับ POP OOTDs
+const ootdData = {
+  male: [
+    {
+      img: "assets/images/cc1.png",
+      likes: "4.9k", userImg: "https://i.pravatar.cc/100?img=11", userName: "ร้าน VIBIT สาขาเพชรบุรี ", price: "500"
+    },
+    {
+      img: "assets/images/cc2.png",
+      likes: "2.4k", userImg: "https://i.pravatar.cc/100?img=12", userName: "ร้าน VIBIT PHUKET ", price: "650"
+    },
+    {
+      img: "assets/images/cc3.png",
+      likes: "1.1k", userImg: "https://i.pravatar.cc/100?img=13", userName: "ร้าน VIBIT SIAM ", price: "890"
+    }
+  ],
+  female: [
+    {
+      img: "https://i.pinimg.com/736x/46/2a/8d/462a8d096e261e8048fdd993bf015d00.jpg",
+      likes: "2.4k", userImg: "https://i.pravatar.cc/100?img=5", userName: "ร้าน VIBIT สาขาเพชรบุรี ", price: "500"
+    },
+    {
+      img: "https://i.pinimg.com/736x/64/b5/c2/64b5c2b3d9d699ffa2400b10a2176a97.jpg",
+      likes: "3.1k", userImg: "https://i.pravatar.cc/100?img=9", userName: "ร้าน VIBIT PHUKET ", price: "650"
+    },
+    {
+      img: "https://i.pinimg.com/736x/45/36/1d/45361d30d6d206a7bf1581d352319062.jpg",
+      likes: "1.8k", userImg: "https://i.pravatar.cc/100?img=20", userName: "ร้าน VIBIT SIAM ", price: "890"
+    }
+  ]
+};
+
+// ฟังก์ชันสำหรับเรนเดอร์การ์ด
+function renderOOTD(gender) {
+  const grid = document.getElementById('ootdGrid');
+  grid.innerHTML = ''; // เคลียร์ของเก่า
+  
+  ootdData[gender].forEach(item => {
+    const cardHtml = `
+      <div class="ootd-card" style="animation: cardPop 0.4s ease both;">
+        <div class="ootd-img-wrap">
+          <img src="${item.img}" alt="OOTD">
+          <div class="like-badge">${item.likes} <img src="assets/images/g-heart.svg" alt="Heart"></div>
+        </div>
+        <div class="ootd-details">
+          <div>
+            <div class="ootd-user">
+              <span>${item.userName}</span>
+            </div>
+            <div class="ootd-price">${item.price}฿/วัน</div>
+          </div>
+          <button class="btn-rent">เช่าชุดนี้</button>
+        </div>
+      </div>
+    `;
+    grid.innerHTML += cardHtml;
+  });
+}
+
+// ตั้งค่าระบบ Toggle สลับชาย/หญิง
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleContainer = document.querySelector('.gender-toggle');
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  
+  // โหลดค่าเริ่มต้น (ชาย)
+  if(document.getElementById('ootdGrid')){
+     renderOOTD('male');
+  }
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // เอาคลาส active ออกจากปุ่มเดิม
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      
+      // เพิ่มคลาสให้ปุ่มที่กด
+      e.target.classList.add('active');
+      
+      // ขยับพื้นหลังสีเขียวตามปุ่มที่กด
+      const gender = e.target.getAttribute('data-gender');
+      if(gender === 'female') {
+        toggleContainer.classList.add('female-active');
+      } else {
+        toggleContainer.classList.remove('female-active');
+      }
+      
+      // โหลดข้อมูลใหม่
+      renderOOTD(gender);
+    });
+  });
+});
   </script>
 </body>
 </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Local Hub – VIBIT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="hide-scroll">
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="assets/images/logo.svg" alt="VIBIT Logo" onerror="this.src=''; this.alt='VIBIT';">
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">หน้าหลัก</a></li>
+      <li><a href="renthub.html">แหล่งรวมร้านเช่า</a></li>
+      <li><a href="localhub.html" class="active">แหล่งรวมบัดดี้</a></li>
+      <li><a href="vibehow.html">วิธีใช้งาน</a></li>
+    </ul>
+    <a href="interact.html" class="btn-nav">เข้าสู่ระบบด้วย LINE</a>
+    <button class="hamburger" id="hamburger">☰</button>
+  </nav>
+    <div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div class="nav-logo">
+        <img src="assets/images/logo.svg" alt="VIBIT" onerror="this.src=''; this.alt='VIBIT';">
+      </div>
+      <button class="menu-close" id="menuClose">✕</button>
+    </div>
+    
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">หน้าหลัก</a></li>
+      <li><a href="renthub.html">แหล่งรวมร้านเช่า</a></li>
+      <li><a href="localhub.html" class="active">แหล่งรวมบัดดี้</a></li>
+      <li><a href="vibehow.html">วิธีใช้งาน</a></li>
+    </ul>
+
+    <div class="mobile-menu-footer">
+      <a href="interact.html" class="btn-primary" style="width: 100%; justify-content: center; background: #06C755;">เข้าสู่ระบบด้วย LINE</a>
+    </div>
+  </div>
+
+  <div class="local-hub-layout">
+    
+    <aside class="local-sidebar">
+      
+      <div class="local-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="buddySearch" value="จังหวัดเชียงใหม่" placeholder="ค้นหาโลเคชั่น, ชื่อ...">
+      </div>
+
+      <div class="local-filters">
+        <button class="f-pill active">ติดดาว</button>
+        <button class="f-pill">หมวดหมู่</button>
+        <button class="f-pill">โลเคชั่น</button>
+        <button class="f-pill">ติดเทรนด์</button>
+        <button class="f-pill">ราคาถูก</button>
+      </div>
+
+      <div class="local-result-text">
+        เจอบัดดี้คู่ใจ <span id="buddyCount">0</span> คนในเชียงใหม่
+      </div>
+
+      <div id="activeBuddyContainer">
+        </div>
+
+    </aside>
+
+    <main class="local-map" id="mapContainer">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120638.06452271373!2d98.91300067332204!3d18.79527719602075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3a7e90bb6f5d%3A0x98d46270a59b4367!2sChiang%20Mai!5e0!3m2!1sen!2sth!4v1700000000000!5m2!1sen!2sth" 
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+
+      <div id="markersLayer"></div>
+    </main>
+
+  </div>
+
+  <script src="lc.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

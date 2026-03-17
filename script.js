@@ -127,27 +127,6 @@ const VIBE_DATA = {
 const DEFAULT_VIBE = VIBE_DATA.Y2K;
 
 /* ─────────────────────────────────────────
-   3. NAVBAR  (scroll + hamburger)
-   ───────────────────────────────────────── */
-(function initNavbar() {
-  const navbar = document.getElementById('navbar');
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    });
-  }
-
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-  }
-})();
-
-/* ─────────────────────────────────────────
    4. SCROLL REVEAL  (shared)
    ───────────────────────────────────────── */
 (function initReveal() {
@@ -339,7 +318,7 @@ const VibitResult = {
   },
 
   contactBuddy(name) {
-    alert(`📩 ส่งคำขอหา ${name} เรียบร้อย!\nรอการตอบรับจาก buddy ของคุณใน 24 ชม.`);
+    alert(`ส่งคำขอหา ${name} เรียบร้อย!\nรอการตอบรับจาก buddy ของคุณใน 24 ชม.`);
   },
 
   share() {
@@ -358,7 +337,7 @@ const VibitResult = {
   _copyFallback(text) {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(() => {
-        alert('✅ คัดลอกข้อความเรียบร้อย! เอาไปแปะโซเชียลได้เลย 🎉');
+        alert('คัดลอกข้อความเรียบร้อย! เอาไปแปะโซเชียลได้เลย');
       });
     } else {
       alert('แชร์:\n\n' + text);
@@ -377,4 +356,29 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
+});
+
+
+
+// ==========================================
+// FULLSCREEN MOBILE MENU LOGIC
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuClose = document.getElementById('menuClose');
+
+  if (hamburger && mobileMenu && menuClose) {
+    // เปิดเมนู
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden'; // ล็อคไม่ให้เลื่อนจอหลังเมนู
+    });
+
+    // ปิดเมนู
+    menuClose.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = ''; // ปลดล็อคจอ
+    });
+  }
 });

@@ -13,140 +13,190 @@
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-logo">
-      <div class="nav-blob" style="animation:blobMorph 4s ease-in-out infinite;"></div>
-      <span>VIBIT</span>
+      <img src="assets/images/logo.svg" alt="">
     </div>
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="vibehow.html" class="active">How it works</a></li>
-      <li><a href="interact.html">Try it</a></li>
-      <li><a href="result.html">Vibes</a></li>
+      <li><a href="index.html">หน้าหลัก</a></li>
+      <li><a href="renthub.html">แหล่งรวมร้านเช่า</a></li>
+      <li><a href="localhub.html">แหล่งรวมบัดดี้</a></li>
+      <li><a href="vibehow.html" class="active">วิธีใช้งาน</a></li>
+      <!-- <li><a href="vibehow.html">How it works</a></li> -->
+      <!-- <li><a href="interact.html">Try it</a></li> -->
+      <!-- <li><a href="result.html">Vibes</a></li> -->
+      <!-- <li><a href="renthub.html">Rent Hub</a></li> -->
     </ul>
-    <a href="interact.html" class="btn-nav">Start Vibe ✨</a>
+    <a href="interact.html" class="btn-nav">เข้าสู่ระบบด้วย LINE</a>
     <button class="hamburger" id="hamburger">☰</button>
   </nav>
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <div class="nav-logo">
+        <img src="assets/images/logo.svg" alt="VIBIT" onerror="this.src=''; this.alt='VIBIT';">
+      </div>
+      <button class="menu-close" id="menuClose">✕</button>
+    </div>
+    
+    <ul class="mobile-nav-links">
+      <li><a href="index.html">หน้าหลัก</a></li>
+      <li><a href="renthub.html">แหล่งรวมร้านเช่า</a></li>
+      <li><a href="localhub.html">แหล่งรวมบัดดี้</a></li>
+      <li><a href="vibehow.html" class="active">วิธีใช้งาน</a></li>
+    </ul>
 
-  <div class="page-wrap">
+    <div class="mobile-menu-footer">
+      <a href="interact.html" class="btn-primary" style="width: 100%; justify-content: center; background: #06C755;">เข้าสู่ระบบด้วย LINE</a>
+    </div>
+  </div>
+  
+<div class="page-wrap">
     <section class="how-page">
 
-      <!-- floating mascots -->
-      <div class="mascot float-2" style="width:120px;height:120px;top:60px;right:5%;position:absolute;">
-        <img src="assets/mascot/blob_blue.png" alt=""
-             onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','blue')"/>
-      </div>
-      <div class="mascot float-3" style="width:90px;height:90px;bottom:200px;left:3%;position:absolute;">
-        <img src="assets/mascot/blob_green.png" alt=""
-             onerror="this.style.display='none';this.parentElement.classList.add('mascot-fallback','green')"/>
-      </div>
-
       <div class="section-label">HOW IT WORKS</div>
-      <h2 class="section-title">ไวบ์อิท ใช้ยังไง? 🤔</h2>
-      <p class="section-sub">3 ขั้นตอนง่ายๆ พร้อมเที่ยวได้ทันที ไม่มีความยุ่งยาก</p>
+      <h2 class="section-title">จบปัญหา "ไม่มีชุด - ไม่มีคนถ่ายรูป"</h2>
+      <p class="section-sub">ให้ VIBIT จัดการทริปคอนเทนต์ของคุณแบบครบวงจร ง่ายๆ ผ่าน LINE OA</p>
 
-      <!-- Steps -->
       <div class="steps-grid">
 
         <div class="step-card reveal">
-          <div class="step-icon-wrap pink-bg">
-            <!-- QR icon -->
-            <svg class="step-icon" viewBox="0 0 24 24" fill="none">
-              <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/>
-              <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/>
-              <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="2"/>
-              <rect x="5" y="5" width="3" height="3" fill="currentColor"/>
-              <rect x="16" y="5" width="3" height="3" fill="currentColor"/>
-              <rect x="5" y="16" width="3" height="3" fill="currentColor"/>
-              <rect x="15" y="15" width="2" height="2" fill="currentColor"/>
-              <rect x="19" y="15" width="2" height="2" fill="currentColor"/>
-              <rect x="15" y="19" width="2" height="2" fill="currentColor"/>
-              <rect x="19" y="19" width="2" height="2" fill="currentColor"/>
+          <div class="step-icon-wrap blue-bg">
+            <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              <path d="M16.5 8.5l-5 5"></path>
+              <path d="M11.5 8.5l5 5"></path>
             </svg>
           </div>
           <div class="step-num">01</div>
-          <h3>Scan QR</h3>
-          <p>สแกน QR ที่งานอีเวนต์หรือร้านที่คุณสนใจ เพื่อเริ่มต้นไวบ์เช็ค ง่าย รวดเร็ว ไม่ต้อง download</p>
-          <div class="step-tag">#easy</div>
+          <h3>Vibe Matcher</h3>
+          <p>ส่งภาพเรฟเฟอเรนซ์สถานที่ (เช่น คาเฟ่ Y2K) เข้ามาใน LINE OA ระบบ AI อัจฉริยะจะวิเคราะห์มู้ดแอนด์โทน และเฟ้นหาสิ่งที่ตรงสไตล์คุณที่สุดทันที</p>
+
         </div>
 
         <div class="step-card reveal">
-          <div class="step-icon-wrap blue-bg">
-            <!-- Camera icon -->
-            <svg class="step-icon" viewBox="0 0 24 24" fill="none">
-              <path d="M23 19C23 20.1 22.1 21 21 21H3C1.9 21 1 20.1 1 19V8C1 6.9 1.9 6 3 6H7L9 3H15L17 6H21C22.1 6 23 6.9 23 8V19Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2"/>
+          <div class="step-icon-wrap pink-bg">
+            <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6"></path>
+              <path d="M12 2l3 3h4a2 2 0 0 1 2 2v3H3V7a2 2 0 0 1 2-2h4l3-3z"></path>
+              <circle cx="12" cy="13" r="2"></circle>
             </svg>
           </div>
           <div class="step-num">02</div>
-          <h3>Capture Vibe</h3>
-          <p>ถ่ายรูป OOTD ของคุณ แล้วให้ AI วิเคราะห์ไวบ์ที่ใช่สำหรับวันนั้น พร้อมแนะนำสถานที่ที่เหมาะ</p>
-          <div class="step-tag">#vibecheck</div>
+          <h3>Rent the Look</h3>
+          <p>เลือกร้านเช่าชุดแฟชั่นและไอเทมถ่ายรูป (เช่น กล้องดิจิทัลวินเทจ) ที่ AI คัดมาให้ ได้ลุคปังๆ โดยไม่ต้องซื้อชุดใหม่ทิ้งขว้าง และไม่ต้องแบกสัมภาระหนัก</p>
+
         </div>
 
         <div class="step-card reveal">
           <div class="step-icon-wrap green-bg">
-            <!-- Share icon -->
-            <svg class="step-icon" viewBox="0 0 24 24" fill="none">
-              <circle cx="18" cy="5" r="3" stroke="currentColor" stroke-width="2"/>
-              <circle cx="6" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
-              <circle cx="18" cy="19" r="3" stroke="currentColor" stroke-width="2"/>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" stroke="currentColor" stroke-width="2"/>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" stroke="currentColor" stroke-width="2"/>
+            <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
           </div>
           <div class="step-num">03</div>
-          <h3>Share Vibe</h3>
-          <p>แชร์ผลลัพธ์ไวบ์ของคุณ หาบัดดี้ที่ไวบ์ตรงกัน และเที่ยวด้วยกัน ลงโซเชียลได้เลย!</p>
-          <div class="step-tag">#sharevibe</div>
+          <h3>Book the Local</h3>
+          <p>จองคิวบัดดี้คู่ใจ หรือตากล้อง/ครีเอเตอร์ในพื้นที่ เพื่อพาไปถ่ายรูปในจุดลับและอีเวนต์ต่างๆ ได้รูปสวยระดับมือโปร พร้อมช่วยกระจายรายได้สู่ชุมชน</p>
+
         </div>
 
       </div>
 
-      <!-- Detail cards -->
       <div class="how-details">
         <div class="detail-card reveal">
-          <h4>🔒 ปลอดภัย 100%</h4>
-          <p>เงินจะถูกโฮลด์ไว้ในระบบจนกว่างานจะเสร็จ ไม่มีการจ่ายตรง ทุกธุรกรรมผ่านระบบ escrow</p>
+          <h4>ระบบจับคู่อัจฉริยะ</h4>
+          <p>หลังบ้านทำงานด้วยเทคโนโลยี AI  ดึงข้อมูลจากฐานข้อมูลร้านค้าและตากล้องที่ตรงตามเรฟเฟอเรนซ์ที่คุณส่งมาได้อย่างแม่นยำ</p>
         </div>
         <div class="detail-card reveal">
-          <h4>🤖 AI Vibe Matcher</h4>
-          <p>ใช้ AI วิเคราะห์สไตล์จากภาพ จากนั้นแมตช์ buddy ร้านเช่า และกิจกรรมที่เหมาะกับ vibe ของคุณ</p>
+          <h4>จองและจ่ายอย่างปลอดภัย</h4>
+          <p>จองบริการทั้งหมดผ่านระบบ Payment ที่ปลอดภัย 100% เงินจะถูกโฮลด์ไว้จนกว่างานจะเสร็จสิ้น ไม่มีการโอนตรง หมดห่วงเรื่องโดนโกง</p>
         </div>
         <div class="detail-card reveal">
-          <h4>⭐ Review System</h4>
-          <p>ทุก buddy และร้านเช่ามีรีวิวจากผู้ใช้จริง รู้ใจ รู้สไตล์ ก่อนตัดสินใจจอง</p>
+          <h4>สนับสนุนเศรษฐกิจท้องถิ่น</h4>
+          <p>แพลตฟอร์มของเราช่วยกระจายรายได้สู่ร้านค้ารายย่อยและ Local Creator ที่มีฝีมือ แต่ขาดพื้นที่ในการโปรโมทตัวเอง</p>
         </div>
         <div class="detail-card reveal">
-          <h4>📍 Local-First</h4>
-          <p>เน้น creator ท้องถิ่น รู้จุด รู้มุม รู้แสง ดีกว่าใครในเมืองนั้น</p>
+          <h4>แฟชั่นยั่งยืน</h4>
+          <p>ลดปัญหา Fast Fashion ซื้อชุดมาใส่ครั้งเดียวแล้วทิ้ง ด้วยบริการเช่าชุดเช็กอินที่คุณจะได้เปลี่ยนลุคใหม่ตลอดเวลาแบบไม่ทำร้ายโลก</p>
         </div>
       </div>
 
       <br/><br/>
-      <a href="interact.html" class="btn-primary">ลองเช็กไวบ์เลย! 🚀</a>
+      <div style="text-align: center;">
+        <a href="interact.html" class="btn-primary" style="background: #00B900;">
+          เริ่มจัดทริปบน LINE เลย
+        </a>
+      </div>
 
     </section>
   </div>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo"><div class="nav-blob"></div>VIBIT</div>
-    <p class="footer-tagline">Find your Vibe. Book your Local.</p>
-    <ul class="footer-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="vibehow.html">How it works</a></li>
-      <li><a href="interact.html">Try Vibe Check</a></li>
-      <li><a href="result.html">Results</a></li>
-      <li><a href="renthub.html">Rent Hub</a></li>
-    </ul>
-    <div class="footer-socials">
-      <a href="#" class="social-btn">📸</a>
-      <a href="#" class="social-btn">🎵</a>
-      <a href="#" class="social-btn">💙</a>
-      <a href="#" class="social-btn">💬</a>
-    </div>
-    <p class="footer-copy">© 2025 VIBIT – Student Project.</p>
-  </footer>
+<footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="assets/images/logo.svg" alt="VIBIT Logo">
+        </a>
+        <p class="footer-tagline">
+          แพลตฟอร์มสำหรับนักท่องเที่ยว สายคอนเทนต์<br>
+          เช่าชุด • หาคู่บัดดี้ • แชร์ไวบ์ ในที่เดียว
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.325V1.325C24 .597 23.403 0 22.675 0z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Line">
+            <svg viewBox="0 0 24 24"><path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.122.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988 2.595h-2.392c-.217 0-.392-.176-.392-.392v-4.305c0-.217.175-.392.392-.392h2.392c.217 0 .392.176.392.392v4.305c0 .216-.175.392-.392.392zm5.753-1.569c0 .217-.175.392-.392.392h-2.392c-.217 0-.392-.176-.392-.392v-4.305c0-.217.175-.392.392-.392h.784c.217 0 .392.176.392.392v3.128h1.216c.217 0 .392.176.392.392v.785zm3.725 1.569h-.784c-.217 0-.392-.176-.392-.392v-4.305c0-.217.175-.392.392-.392h.784c.217 0 .392.176.392.392v4.305c0 .216-.175.392-.392.392zm4.51 0h-2.392c-.217 0-.392-.176-.392-.392v-4.305c0-.217.175-.392.392-.392h.784c.217 0 .392.176.392.392v2.353l1.216-2.614c.089-.193.284-.331.503-.331h.71c.328 0 .524.364.339.643l-1.549 2.308 1.638 2.553c.196.305-.024.71-.384.71h-.735c-.144 0-.28-.08-.358-.212l-1.127-1.905v1.408c0 .216-.175.392-.392.392z"/></svg>
+          </a>
+        </div>
+      </div>
 
+      <div class="footer-links-group">
+        <h4 class="footer-heading">เมนูหลัก</h4>
+        <ul class="footer-links-list">
+          <li><a href="index.html">หน้าหลัก</a></li>
+          <li><a href="#">แหล่งรวมร้านเช่า</a></li>
+          <li><a href="#">แหล่งรวมบัดดี้</a></li>
+          <li><a href="#">วิธีใช้งาน</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">ฟีเจอร์เด่น</h4>
+        <ul class="footer-links-list">
+          <li><a href="interact.html">Vibe Check (ใหม่!)</a></li>
+          <li><a href="result.html">ค้นหาผลลัพธ์</a></li>
+          <li><a href="#">Vibe of the week</a></li>
+          <li><a href="#">POP OOTDs</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-group">
+        <h4 class="footer-heading">ติดต่อเรา</h4>
+        <ul class="footer-links-list">
+          <li><a href="mailto:hello@vibit.com">hello@vibit.com</a></li>
+          <li><a href="#">ศูนย์ช่วยเหลือ</a></li>
+          <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
+          <li><a href="#">ข้อตกลงและเงื่อนไข</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 VIBIT – Interactive Application Design Student Project. All rights reserved.</p>
+      <div class="footer-legal">
+        <span>Made with ♡ in Bangkok</span>
+      </div>
+    </div>
+  </footer>
   <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
