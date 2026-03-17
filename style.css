@@ -499,7 +499,7 @@ background-clip: text;
 }
 .hero-stats {
   display: flex; align-items: center; justify-content: center; gap: 24px;
-  flex-wrap: wrap; margin-top: 10rem;
+  flex-wrap: wrap; margin-top: 10vh;
 }
 .stat { display:flex; flex-direction:column; align-items:center; }
 .stat-num  { font-family:var(--font-display); font-size:32px; font-weight:700; }
@@ -1882,4 +1882,39 @@ gap: 10px;
 .mobile-menu-footer {
   margin-bottom: 40px;
   width: 100%;
+}
+
+/* ============================================
+   FIX: แยก CSS ของ OOTD Toggle ไม่ให้ชนกับ Rent Hub
+   ============================================ */
+/* 1. บังคับให้ Slider ของ OOTD กลับมาเป็นกล่องพื้นหลังสีเขียว */
+.gender-toggle .toggle-slider {
+  position: absolute !important;
+  top: 4px !important; 
+  left: 4px !important;
+  width: calc(50% - 4px) !important;
+  height: calc(100% - 8px) !important;
+  background: #06C755 !important;
+  border-radius: 20px !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  z-index: 1 !important;
+}
+
+/* 2. ปิดจุดวงกลมสีขาวที่หลุดมาจากหน้า Rent Hub */
+.gender-toggle .toggle-slider::before {
+  display: none !important;
+}
+
+/* 3. จัดการกรอบและปุ่มให้อยู่ทรงเดิม */
+.gender-toggle {
+  position: relative;
+  display: inline-flex;
+  background: white;
+  border-radius: 30px;
+  padding: 4px;
+  border: 1px solid #E0E0E0;
+}
+
+.gender-toggle.female-active .toggle-slider { 
+  transform: translateX(100%) !important; 
 }
